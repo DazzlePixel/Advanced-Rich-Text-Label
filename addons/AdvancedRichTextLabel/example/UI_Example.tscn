@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg7koguxg502i"]
+
+[ext_resource type="Script" uid="uid://c1s8bv4epo02a" path="res://addons/AdvancedRichTextLabel/src/advanced_rich_text_label.gd" id="1_qa6k3"]
+[ext_resource type="Script" uid="uid://c544fafrexnag" path="res://addons/AdvancedRichTextLabel/src/advanced_rich_text_label_parser.gd" id="2_ak4a5"]
+[ext_resource type="Script" uid="uid://c7ccha4jux681" path="res://addons/AdvancedRichTextLabel/example/advanced_rich_text_label_parser_example.gd" id="3_15cgq"]
+
+[sub_resource type="GDScript" id="GDScript_2qi2a"]
+script/source = "extends Control
+
+@export var _artl: AdvancedRichTextLabel
+
+func _ready() -> void:
+	await get_tree().create_timer(5.0).timeout
+	_artl.text = \"Next: [example]a[/example]\"
+	pass
+
+func _input(event: InputEvent) -> void:
+	ExampleSignal.example.emit(event.get_class())
+	pass
+"
+
+[sub_resource type="Resource" id="Resource_y4uif"]
+script = ExtResource("3_15cgq")
+metadata/_custom_type_script = "uid://c7ccha4jux681"
+
+[node name="UI_Example" type="Control" node_paths=PackedStringArray("_artl")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_2qi2a")
+_artl = NodePath("AdvancedRichTextLabel")
+
+[node name="AdvancedRichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "InputType: [example]a[/example]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_qa6k3")
+_parsers = Array[ExtResource("2_ak4a5")]([SubResource("Resource_y4uif")])
+metadata/_custom_type_script = "uid://c1s8bv4epo02a"
