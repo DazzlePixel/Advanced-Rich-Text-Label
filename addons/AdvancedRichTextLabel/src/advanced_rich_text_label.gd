@@ -1,5 +1,5 @@
+@icon("res://addons/AdvancedRichTextLabel/icon.svg")
 extends RichTextLabel
-
 ## Extends [code]RichTextLabel[/code] to conduct custom parsing with custom BBcodes.
 ## It differs from [code]RichTextEffect[/code] as it only capable of altering the visuals of texts while this actually manipulates the texts itself.
 class_name AdvancedRichTextLabel
